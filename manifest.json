@@ -1,0 +1,22 @@
+{
+  "name": "NU-NET Auto Auth",
+  "version": "0.0.1",
+  "author": "Antony Harfield",
+  "homepage_url": "http://www.mobcomlab.com",
+  "description": "Stay online all the time at Naresuan University",
+  "permissions": ["alarms", "background", "tabs",
+                  "https://login.nu.ac.th:1000/*", "http://clients3.google.com/generate_204"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "browser_action": {
+    "default_icon" : "icon.png",
+    "default_title": "NU-NET Offline"
+  },
+  
+  "options_page": "options.html",
+
+  "manifest_version": 2
+}

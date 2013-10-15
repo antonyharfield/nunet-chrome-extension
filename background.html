@@ -1,0 +1,39 @@
+<html>
+  <script>
+    function loadHandler() {
+      startRequest();
+    }
+    
+    
+    var pollInterval = 1000 * 10; // milliseconds
+    var timerId;
+
+    function startRequest() {
+    	run();
+    	//timerId = window.setTimeout(startRequest, pollInterval);
+    }
+
+    function stopRequest() {
+	    //window.clearTimeout(timerId);
+	}
+	
+	function run() {
+		console.log("test");
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "http://clients3.google.com/generate_204", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				// innerText does not let the attacker inject HTML elements.
+				console.log("here: "+xhr.responseText);
+			}
+		}
+		xhr.send();
+	}
+
+	window.addEventListener('load', loadHandler);
+  </script>
+
+  <body>
+  </body>
+</html>
