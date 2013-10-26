@@ -3,12 +3,10 @@ function checkForInternet() {
 	
 	pingGoogle(function() {
 		console.log("we are online");
-		chrome.browserAction.setBadgeText({text: "OK"});
 		chrome.browserAction.setIcon({path: "icon.png"});
 		
 	}, function(respText) {
 		console.log("no internet!")
-		chrome.browserAction.setBadgeText({text: ""});
 		chrome.browserAction.setIcon({path: "icon-offline.png"});
 							
 		// Try find a token in the NU-NET auth page
@@ -61,7 +59,6 @@ function connectNuNet(token) {
 		if (xhr.readyState == 4) {
 			pingGoogle(function() {
 				console.log("connect success");
-				chrome.browserAction.setBadgeText({text: "OK"});
 				chrome.browserAction.setIcon({path: "icon.png"});
 			}, function(respText) {
 				console.log("connect unsuccessful, maybe not NU");
@@ -75,18 +72,22 @@ function connectNuWireless() {
 	
 }
 
-	
-chrome.browserAction.setBadgeText({text: ""});
+// Default icon is offline
 chrome.browserAction.setIcon({path: "icon-offline.png"});
 
+// Open options on button click
 chrome.browserAction.onClicked.addListener(function() {
 	chrome.tabs.create({url: "options.html"});
 });
 
+// Check for internet when the first tab is loaded
+chrome.tabs.onCreated.addListener(function() {
+  checkForInternet();
+});
 
-// Set up alarm to check internet every minute
+// Set up alarm to check internet every 3 minutes
 chrome.alarms.onAlarm.addListener(function() {
   checkForInternet();
 });
-chrome.alarms.create({when: 0, periodInMinutes: 1});
+chrome.alarms.create({when: 0, periodInMinutes: 3});
 
