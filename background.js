@@ -81,9 +81,8 @@ chrome.browserAction.onClicked.addListener(function() {
 });
 
 // Check for internet when the first tab is loaded
-chrome.tabs.onCreated.addListener(function() {
-  checkForInternet();
-});
+chrome.tabs.onCreated.addListener(checkForInternet);
+chrome.windows.onCreated.addListener(checkForInternet);
 
 // Set up alarm to check internet every 3 minutes
 chrome.alarms.onAlarm.addListener(function() {

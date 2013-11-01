@@ -1,19 +1,62 @@
+<!DOCTYPE html>
 <html>
-<head><title>NU-NET Auto Auth Extension Options</title></head>
-
-<body>
-<h1>NU-NET Auto Auth Options</h1>
-Username:
-<input type="text" id="username">
-<br>
-Password:
-<input type="password" id="password">
-<br>
-<button id="save">Save</button>
-
-<div id="status"></div>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+    html, body { height:100%; padding:0; margin:0; font-family:helvetica,sans-serif; }
+	.oc {
+        display:table;
+        width:100%;
+        height:100%;
+    }
+	.ic {
+        display:table-cell;
+        vertical-align:middle;
+        height:100%;
+    }
+	.sq {
+        display:block;
+        background:#ccc;
+        border:2px solid red;
+        width:460px;
+        font-size:14px;
+        margin:10px auto;
+    }
+	p {
+        margin:15px 0;
+        text-align: center;
+    }
+	h1 {
+        font-size:21px;
+        margin:0;
+        padding:16px 10px;
+        text-align: center;
+    }
+    h2 { margin:25px 10px; text-align: center; font-size:18px; }
+	.logo { padding: 20px 0 0 0; text-align: center;}
+	.mcl { text-align: center; margin-top: 25px; font-size:12px;}
+	.mcl a { color: #000 }
+    </style>
+    <title>NU-NET Auto Auth Options</title>
+  </head>
+  <body>
+    <div class="oc">
+      <div class="ic">
+        <div class="sq">
+		  <div style="background:#e0e0e0">
+            <div class="logo"><img src="nu-logo.png"></div>
+            <h1>NU-NET Firewall "Auto" Authentication</h1>
+		  </div>
+          <h2>Chrome Extension Settings</h2>
+          <p>Username: <input type="text" id="username"></p>
+          <p>Password: <input type="password" id="password"></p>
+          <p><button id="save">Save &amp; Close</button></p>
+        </div>
+		<div class="mcl">
+			Developed by <a href="http://www.mobcomlab.com">Mobile Computing Lab</a>
+		</div>
+      </div>
+    </div>
 </body>
-
 <script src="options.js"></script>
-
 </html>
