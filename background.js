@@ -18,19 +18,16 @@ function checkForInternet() {
 
 function pingMCL(success, fail) {
 	var xhrCheck = new XMLHttpRequest();
-	xhrCheck.open("GET", "http://www.mobcomlab.com/?_=" + new Date().getTime(), true);
+	xhrCheck.open("GET", "http://mobcomlab.s3.amazonaws.com/pingtest.json?_=" + new Date().getTime(), true);
 	xhrCheck.onreadystatechange = function() {
-        console.log(xhrCheck);
-        console.log("Pass1"+xhrCheck.readyState+" "+xhrCheck.status);
-		if (xhrCheck.readyState == 4) {
-			if (xhrCheck.status === 200 && xhrCheck.responseURL.includes("nu.ac.th") == false) {
-                console.log("Pass2");
-				success();
-			}
-            else {
-                console.log("Pass3");
-				fail(xhrCheck.responseText);
-			}
+		if (xhrCheck.readyState == 4 && xhrCheck.status === 200) {
+            try {
+                if (JSON.parse(xhrCheck.responseText).success) {
+                    success()
+                }
+            } catch (e) {
+                fail(xhrCheck.responseText);
+            }
 		}
 	};
 	xhrCheck.send();
@@ -40,14 +37,12 @@ function getValueFromNuNet() {
     var xhrGet = new XMLHttpRequest();
     xhrGet.open("GET", "https://authen3.nu.ac.th/Login.aspx", true);
     xhrGet.onreadystatechange = function() {
-        if (xhrGet.readyState == 4) {
-            if (xhrGet.status === 200) {
-                var el = document.createElement('html');
-                el.innerHTML = xhrGet.responseText;
-                var input = el.getElementsByTagName("INPUT");
-                getViewState(input);
-                connectNuNet();
-            }
+        if (xhrGet.readyState == 4 && xhrGet.status === 200) {
+            var el = document.createElement('html');
+            el.innerHTML = xhrGet.responseText;
+            var input = el.getElementsByTagName("INPUT");
+            getViewState(input);
+            connectNuNet();
         }
     };
     xhrGet.send();
@@ -132,5 +127,5 @@ chrome.windows.onCreated.addListener(checkForInternet);
 chrome.alarms.onAlarm.addListener(function() {
   checkForInternet();
 });
-chrome.alarms.create({when: 0, periodInMinutes: 1});
+chrome.alarms.create({when: 0, periodInMinutes: 3});
 

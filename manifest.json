@@ -6,7 +6,7 @@
   "description": "Stay online all the time at Naresuan University",
   "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
   "permissions": ["alarms", "background", "tabs",
-                  "https://authen3.nu.ac.th/*", "http://www.mobcomlab.com/"],
+                  "https://authen3.nu.ac.th/*", "http://mobcomlab.s3.amazonaws.com/pingtest.json"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
